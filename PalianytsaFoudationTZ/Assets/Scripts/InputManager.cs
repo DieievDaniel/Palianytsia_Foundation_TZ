@@ -38,7 +38,7 @@ public class InputManager : MonoBehaviour
         if (jumpInput)
         {
             Jump();
-            jumpInput = false; // Ñבנמס פכאדא ןמסכו ןנûזךא
+            jumpInput = false; 
         }
     }
 

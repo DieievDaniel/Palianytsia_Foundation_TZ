@@ -7,9 +7,9 @@ public class ItemInteraction : MonoBehaviour
     private GameObject pickedItem;
     private bool isCarryingItem = false;
 
-    public Transform carryTransform; // Позиция, в которой будет держаться поднятый предмет
-    public float throwForce = 10f; // Сила броска предмета
-    public float maxInteractionDistance = 1f; // Максимальное расстояние для взаимодействия с предметом
+    public Transform carryTransform; 
+    public float throwForce = 10f; 
+    public float maxInteractionDistance = 1f; 
 
     private void Awake()
     {
@@ -37,7 +37,6 @@ public class ItemInteraction : MonoBehaviour
             {
                 if (hit.collider.CompareTag("Item"))
                 {
-                    // Поднимаем предмет
                     pickedItem = hit.collider.gameObject;
                     pickedItem.transform.SetParent(carryTransform);
                     pickedItem.transform.localPosition = Vector3.zero;
@@ -51,7 +50,6 @@ public class ItemInteraction : MonoBehaviour
     {
         if (isCarryingItem && pickedItem != null)
         {
-            // Бросаем предмет
             pickedItem.transform.SetParent(null);
             Rigidbody itemRB = pickedItem.GetComponent<Rigidbody>();
             if (itemRB != null)
@@ -62,5 +60,15 @@ public class ItemInteraction : MonoBehaviour
             pickedItem = null;
             isCarryingItem = false;
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("Collision with: " + collision.gameObject.name);
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        Debug.Log("Exit collision with: " + collision.gameObject.name);
     }
 }
